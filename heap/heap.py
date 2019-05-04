@@ -1,6 +1,8 @@
 import uuid
+import math
 from heap.node import Node
 from heap.utils import * 
+from heap.draw import draw_heap
 
 class Heap:
   def __init__(self):
@@ -20,7 +22,7 @@ class Heap:
     if not self._root:
       self._root = node 
     else:
-      insert(self._root, node, self.complete_levels, 0)
+      insert(self._root, node, self.complete_levels, 1)
 
   def _should_fix(self, parent, child):
     if self._max_heap:

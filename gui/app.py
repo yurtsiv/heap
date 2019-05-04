@@ -78,7 +78,7 @@ class App:
     )
 
   def on_print_click(self):
-    str_repres= self.heap.get_string_repres()
+    str_repres= self.heap.string_representations()
     self.text_output.println(
       'In-order: ' + str_repres['in_order'] + '\n' +
       'Pre-order: ' + str_repres['pre_order'] + '\n' +
