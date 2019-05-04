@@ -1,13 +1,15 @@
 import math
 
+vertical_offset = 80
+horizontal_offset_factor = 20
+
 def draw_heap(root, rel_side, parent_pos, curr_depth, static_params):
   if not root:
     return
 
   canvas, tree_size = static_params['canvas'], static_params['tree_size']
 
-  horizontal_offset = (tree_size * 50) / math.pow(curr_depth, 2)
-  vertical_offset = 50
+  horizontal_offset = (tree_size * horizontal_offset_factor) / math.pow(curr_depth, 2)
 
   new_pos = { 'y': parent_pos['y'] + vertical_offset, 'x': None }
 
