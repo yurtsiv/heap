@@ -12,18 +12,13 @@ class Node:
       return 'left'
     
     return 'right'
-
+  
 
   def substitute_with_parent(self):
     relative_side = self.find_relative_side()
 
-    if self.right:
-      self.right.parent = self.parent
-    
-    if self.left:
-      self.left.parent = self.parent
-
     if relative_side == 'left':
+      # modify parent's right child parent
       if self.parent.right:
         self.parent.right.parent = self
 
@@ -31,11 +26,12 @@ class Node:
       self.parent.left = self.left
       self.left = self.parent
 
-      #switch right sides 
+      # switch right sides 
       prev_self_right = self.right
       self.right = self.parent.right
       self.parent.right = prev_self_right
     else:
+      # modify parent's left child parent
       if self.parent.left:
         self.parent.left.parent = self
 
@@ -48,11 +44,13 @@ class Node:
       self.left = self.parent.left
       self.parent.left = prev_self_left
 
-    prev_parent = self.parent
     if self.parent.parent:
       # modify parent's parent to point to self
       parent_side = self.parent.find_relative_side()
       setattr(self.parent.parent, parent_side, self)
 
+    prev_parent = self.parent
+    # make grandpa your parent
     self.parent = self.parent.parent
+    # make parent your child
     prev_parent.parent = self
