@@ -2,12 +2,15 @@ from tkinter import *
 
 class TextOutput:
   def __init__(self, root):
-    root.columnconfigure(0, minsize=root.winfo_width() - 15)
+    root.grid_columnconfigure(0, weight=1)
+    root.grid_columnconfigure(1, weight=0)
+    root.grid_rowconfigure(0, weight=0)
+    root.grid_rowconfigure(1, weight=1)
 
     Label(root, text="Output:").grid(row=0, sticky="W")
 
     scrollbar = Scrollbar(root)
-    self.text_cont = Text(root, height=15)
+    self.text_cont = Text(root, height=10)
     self.text_cont.config(state=DISABLED)
 
     self.text_cont.grid(row=1, column=0, sticky="WENS")

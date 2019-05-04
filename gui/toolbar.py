@@ -14,6 +14,7 @@ class Toolbar:
     on_print_click,
     on_reset_click
   ):
+    # validate inputs
     vcmd = master.register(self.validate_num)
     self.vcmd = vcmd
 
@@ -70,7 +71,7 @@ class Toolbar:
   ):
     root.grid_columnconfigure(column, pad=20)
     Label(root, text=label).grid(row=row, column=column, sticky="W")
-    entry = Entry(root, validate='all', validatecommand=(self.vcmd, '%P'))
+    entry = Entry(root, validate='all', validatecommand=(self.vcmd, '%P'), width=10)
     entry.grid(row=row+1, column=column, sticky="W")
     btn = Button(
       root,

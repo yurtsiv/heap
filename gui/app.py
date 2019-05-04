@@ -11,29 +11,19 @@ class App:
 
   def __init__(self, master):
     self.master = master
+
+    # open full screen
+    master.wm_attributes('-zoomed', True)
+    master.update()
+
     self.init_ui_elems()
-    master.update()
-    self.resize_ui_elems(None)
-    master.bind("<Configure>", self.resize_ui_elems)
 
-  def resize_ui_elems(self, _event):
-    master = self.master
-    bottom_section = self.bottom_section
-
-    win_height = master.winfo_height()
-    win_width = master.winfo_width()
-
-    master.grid_rowconfigure(0, minsize=win_height*0.75)
-    master.grid_rowconfigure(1, minsize=win_height*0.25)
-    master.grid_columnconfigure(0, minsize=win_width)
-
-    bottom_section.grid_columnconfigure(0, minsize=win_width * 0.25)
-    bottom_section.grid_columnconfigure(1, minsize=win_width * 0.75 - 10)
-
-    master.update()
-  
   def init_ui_elems(self):
     master = self.master
+
+    master.grid_rowconfigure(0, weight=1)
+    master.grid_rowconfigure(1, weight=0)
+    master.grid_columnconfigure(0, weight=1)
 
     # Canvas
     canvas_cont = Frame(master)
@@ -43,7 +33,10 @@ class App:
     # Toolbar & text ouput
     bottom_section = Frame(master, bd=5, relief=RIDGE)
     self.bottom_section = bottom_section
-    bottom_section.grid(row=1)
+    bottom_section.grid(row=1, sticky="WENS")
+    bottom_section.grid_columnconfigure(0, weight=0)
+    bottom_section.grid_columnconfigure(1, weight=3)
+    bottom_section.grid_rowconfigure(0, weight=1)
 
     # Toolbar
     toolbar_cont = Frame(bottom_section)
