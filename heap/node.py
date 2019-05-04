@@ -17,6 +17,12 @@ class Node:
   def substitute_with_parent(self):
     relative_side = self.find_relative_side()
 
+    if self.right:
+      self.right.parent = self.parent
+    
+    if self.left:
+      self.left.parent = self.parent
+
     if relative_side == 'left':
       # modify parent's right child parent
       if self.parent.right:
