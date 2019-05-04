@@ -28,8 +28,6 @@ class Heap:
       
       if key < self.root.key:
         self.root = node
-      
-      print("holad")
 
   def remove(self, key):
     pass
