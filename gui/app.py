@@ -42,7 +42,8 @@ class App:
       on_max_click=self.on_max_click,
       on_print_click=self.on_print_click,
       on_reset_click=self.on_reset_click,
-      on_max_heap_toggle=self.on_max_heap_toggle
+      on_max_heap_toggle=self.on_max_heap_toggle,
+      on_levels_click=self.on_levels_click
     )
 
     toolbar_cont.grid(row=0, column=0, sticky="WENS")
@@ -52,6 +53,11 @@ class App:
     text_output_cont.grid(row=0, column=1, sticky="WENS")
     self.text_output = TextOutput(text_output_cont)
   
+  def on_levels_click(self):
+    self.text_output.println(
+      "Complete levels: " + str(self.heap.complete_levels)
+    )
+
   def on_max_heap_toggle(self):
     self.heap.toggle_max_heap()
     self.heap_canvas.draw(self.heap)
