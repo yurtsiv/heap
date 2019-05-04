@@ -9,19 +9,6 @@ class Heap:
     self._max_heap = False 
     self.keys = []
 
-  def toggle_max_heap(self):
-    self._max_heap = not self._max_heap
-
-    # to avoid fixing
-    self.keys.sort(reverse=self._max_heap)
-    self._root = None
-    self.size = 0
-    self.complete_levels = 0
-
-    for key in self.keys:
-      self._insert(self._create_node(key))
-      self._handle_size_increase()
-  
   def _handle_size_increase(self):
     self.size += 1
     self.complete_levels = math.floor(math.log2(self.size + 1))
@@ -35,15 +22,28 @@ class Heap:
     else:
       insert(self._root, node, self.complete_levels, 0)
 
-  # checks if heap is incorrect
-  def _should_fix(self, root, child):
+  def _should_fix(self, parent, child):
     if self._max_heap:
-      # in max-heap root must be greater than its child
-      return child.key > root.key 
+      # in max-heap child must be smaller than its parent 
+      return child.key > parent.key 
     
-    # in min-heap root must be smaller than its child
-    return root.key > child.key
+    # in min-heap child must be greater than its parent
+    return child.key < parent.key
 
+  def toggle_max_heap(self):
+    self._max_heap = not self._max_heap
+
+    # to avoid fixing
+    self.keys.sort(reverse=self._max_heap)
+
+    # reconstruct the heap from scratch
+    self._root = None
+    self.size = 0
+    self.complete_levels = 0
+    for key in self.keys:
+      self._insert(self._create_node(key))
+      self._handle_size_increase()
+  
   def add(self, key):
     self.keys.append(key)
     node = self._create_node(key)
@@ -59,6 +59,7 @@ class Heap:
     elif key < self.min:
       self.min = key
 
+    # if the node became a new root
     if self._should_fix(self._root, node):
       self._root = node
 
@@ -71,7 +72,7 @@ class Heap:
       { 'canvas': canvas, 'tree_size': self.size }
     )
   
-  def to_string(self):
+  def string_representations(self):
     return {
       'in_order': traverse_in_order(self._root),
       'pre_order': traverse_pre_order(self._root),
