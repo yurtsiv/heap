@@ -38,27 +38,31 @@ class Toolbar:
 
     # Size
     size_btn = Button(root, text="Size", command=on_size_click)
-    size_btn.grid(row=1, column=2, sticky="WENS") 
+    size_btn.grid(row=1, column=2, sticky="WE") 
 
     # Root
     root_btn = Button(root, text="Root", command=on_root_click)
-    root_btn.grid(row=2, column=2, sticky="WENS") 
+    root_btn.grid(row=2, column=2, sticky="WE") 
 
     # Min
     min_btn = Button(root, text="Min", command=on_min_click)
-    min_btn.grid(row=3, column=2, sticky="WENS") 
+    min_btn.grid(row=3, column=2, sticky="WE") 
 
     # Max
     max_btn = Button(root, text="Max", command=on_max_click)
-    max_btn.grid(row=1, column=3, sticky="WENS") 
+    max_btn.grid(row=1, column=3, sticky="WE") 
 
     # Print
     print_btn = Button(root, text="Print", command=on_print_click)
-    print_btn.grid(row=2, column=3, sticky="WENS") 
+    print_btn.grid(row=2, column=3, sticky="WE") 
 
     # Reset
     reset_btn = Button(root, text="Reset", command=on_reset_click)
-    reset_btn.grid(row=3, column=3, sticky="WENS") 
+    reset_btn.grid(row=3, column=3, sticky="WE") 
+
+    # Max heap checkbox
+    max_checkbtn = Checkbutton(root, text="Max heap")
+    max_checkbtn.grid(row=5, column=2)
 
   def make_entry_field(
     self,
@@ -69,7 +73,8 @@ class Toolbar:
     row,
     column,
   ):
-    root.grid_columnconfigure(column, pad=20)
+    root.grid_columnconfigure(column, pad=30)
+
     Label(root, text=label).grid(row=row, column=column, sticky="W")
     entry = Entry(root, validate='all', validatecommand=(self.vcmd, '%P'), width=10)
     entry.grid(row=row+1, column=column, sticky="W")
