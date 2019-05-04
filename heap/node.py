@@ -1,9 +1,8 @@
 class Node:
-  id, key, left, right, parent = None, None, None, None, None
-
   def __init__(self, id, key):
     self.id = id
     self.key = key
+    self.right = self.left = self.parent = None
 
   def find_relative_side(self):
     if not self.parent:

@@ -7,11 +7,11 @@ class Toolbar:
     root,
     on_add_new_node,
     on_size_click,
-    on_root_click,
     on_min_click,
     on_max_click,
     on_print_click,
-    on_reset_click
+    on_reset_click,
+    on_max_heap_toggle
   ):
     # validate inputs
     vcmd = master.register(self.validate_num)
@@ -38,28 +38,30 @@ class Toolbar:
     size_btn = Button(root, text="Size", command=on_size_click)
     size_btn.grid(row=1, column=2, sticky="WE") 
 
-    # Root
-    root_btn = Button(root, text="Root", command=on_root_click)
-    root_btn.grid(row=2, column=2, sticky="WE") 
-
     # Min
     min_btn = Button(root, text="Min", command=on_min_click)
-    min_btn.grid(row=3, column=2, sticky="WE") 
+    min_btn.grid(row=2, column=2, sticky="WE") 
 
     # Max
     max_btn = Button(root, text="Max", command=on_max_click)
-    max_btn.grid(row=1, column=3, sticky="WE") 
+    max_btn.grid(row=3, column=2, sticky="WE") 
 
     # Print
     print_btn = Button(root, text="Print", command=on_print_click)
-    print_btn.grid(row=2, column=3, sticky="WE") 
+    print_btn.grid(row=1, column=3, sticky="WE") 
 
     # Reset
     reset_btn = Button(root, text="Reset", command=on_reset_click)
-    reset_btn.grid(row=3, column=3, sticky="WE") 
+    reset_btn.grid(row=2, column=3, sticky="WE") 
 
     # Max heap checkbox
-    max_checkbtn = Checkbutton(root, text="Max heap")
+    max_checkbtn = Checkbutton(
+      root,
+      text="Max heap", 
+      onvalue=True,
+      offvalue=False,
+      command=on_max_heap_toggle
+    )
     max_checkbtn.grid(row=4, column=2, sticky="W")
 
   def make_entry_field(
@@ -90,7 +92,8 @@ class Toolbar:
     def handle():
       entry_value = entry.get()
       if entry_value:
-        values = [int(item) for item in entry_value.split(",")]
+        str_values = filter(lambda x: x.isdigit(), entry_value.split(","))
+        values = [int(item) for item in str_values]
         callback(values)
         entry.delete(0, END)
       

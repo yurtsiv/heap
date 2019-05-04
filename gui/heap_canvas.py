@@ -1,6 +1,8 @@
 from tkinter import *
 
 class HeapCanvas:
+  canvas = None
+
   def __init__(self, master, root):
     self.canvas = Canvas(root)
     self.canvas.pack(fill=BOTH, expand=1)

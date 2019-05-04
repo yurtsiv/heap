@@ -1,11 +1,11 @@
 import math
 
-def insert(root, node, levels, curr_level):
+def insert(root, node, complete_levels, curr_level):
   if not root:
     return False
 
   # if on last complete level
-  if curr_level == levels - 1:
+  if curr_level == complete_levels - 1:
     if root.left == None:
       node.parent = root
       root.left = node
@@ -18,28 +18,28 @@ def insert(root, node, levels, curr_level):
     
     return False
   
-  if insert(root.left, node, levels, curr_level + 1):
+  if insert(root.left, node, complete_levels, curr_level + 1):
     return True
   
-  return insert(root.right, node, levels, curr_level+1)
+  return insert(root.right, node, complete_levels, curr_level+1)
 
-def correct_heap(root):
+def fix_heap(root, should_fix):
   if not root or (not root.left and not root.right):
     return
 
   prev_root_parent = root.parent
-  if root.left and root.left.key < root.key:
+  if root.left and should_fix(root, root.left):
     root.left.substitute_with_parent()
-    correct_heap(prev_root_parent)
-  elif root.right and root.right.key < root.key:
+    fix_heap(prev_root_parent, should_fix)
+  elif root.right and should_fix(root, root.right):
     root.right.substitute_with_parent()
-    correct_heap(prev_root_parent)
+    fix_heap(prev_root_parent, should_fix)
   else:
-    correct_heap(root.left)
-    correct_heap(root.right)
+    fix_heap(root.left, should_fix)
+    fix_heap(root.right, should_fix)
 
 
-def draw(root, rel_side, parent_pos, curr_depth, static_params):
+def draw_heap(root, rel_side, parent_pos, curr_depth, static_params):
   if not root:
     return
 
@@ -70,10 +70,10 @@ def draw(root, rel_side, parent_pos, curr_depth, static_params):
     return
 
   if root.left:
-    draw(root.left, 'left', new_pos, curr_depth+1, static_params)
+    draw_heap(root.left, 'left', new_pos, curr_depth+1, static_params)
 
   if root.right:
-    draw(root.right, 'right', new_pos, curr_depth+1, static_params)
+    draw_heap(root.right, 'right', new_pos, curr_depth+1, static_params)
 
 def traverse_in_order(root):
   if not root:
