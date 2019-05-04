@@ -6,7 +6,6 @@ class Toolbar:
     master,
     root,
     on_add_new_node,
-    on_remove_node,
     on_size_click,
     on_root_click,
     on_min_click,
@@ -17,7 +16,6 @@ class Toolbar:
     # validate inputs
     vcmd = master.register(self.validate_num)
     self.vcmd = vcmd
-
 
     root.grid_columnconfigure(0, minsize=80)
     root.grid_columnconfigure(1, minsize=20)
@@ -33,15 +31,6 @@ class Toolbar:
       btn_label='Add',
       submit_handler=on_add_new_node,
       row=0,
-      column=0
-    )
-
-    self.make_entry_field(
-      root,
-      label='Remove node',
-      btn_label='Remove',
-      submit_handler=on_remove_node,
-      row=3,
       column=0
     )
 
@@ -92,17 +81,17 @@ class Toolbar:
     )
     btn.grid(row=row+2, column=column, sticky="WENS")
 
-  def validate_num(self, P):
-    if str.isdigit(P) or P == '':
-        return True
-    else:
-        return False
+  def validate_num(self, str):
+    return all(
+      item == '' or item.isdigit() for item in str.split(",")
+    )
   
   def on_entry_submit(self, entry, callback):
     def handle():
       entry_value = entry.get()
       if entry_value:
-        callback(int(entry_value))
+        values = [int(item) for item in entry_value.split(",")]
+        callback(values)
         entry.delete(0, END)
       
     return handle

@@ -29,9 +29,6 @@ class Heap:
       if key < self.root.key:
         self.root = node
 
-  def remove(self, key):
-    pass
-    
   def draw(self, canvas, init_pos):
     draw(
       self.root,

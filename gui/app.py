@@ -44,7 +44,6 @@ class App:
       master,
       toolbar_cont,
       on_add_new_node=self.on_add_new_node,
-      on_remove_node=self.on_remove_node,
       on_size_click=self.on_size_click,
       on_root_click=self.on_root_click,
       on_min_click=self.on_min_click,
@@ -93,10 +92,8 @@ class App:
     self.bst_canvas.draw(self.heap)
     self.text_output.clear()
 
-  def on_add_new_node(self, key):
-    self.heap.add(key)
-    self.bst_canvas.draw(self.heap)
+  def on_add_new_node(self, keys):
+    for key in keys:
+      self.heap.add(key)
 
-  def on_remove_node(self, key):
-    self.heap.remove(key)
     self.bst_canvas.draw(self.heap)

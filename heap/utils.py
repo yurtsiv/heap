@@ -1,10 +1,11 @@
 import math
 
-def insert(root, node, levels, level):
+def insert(root, node, levels, curr_level):
   if not root:
     return False
 
-  if level == levels - 1:
+  # if on last complete level
+  if curr_level == levels - 1:
     if root.left == None:
       node.parent = root
       root.left = node
@@ -17,10 +18,10 @@ def insert(root, node, levels, level):
     
     return False
   
-  if insert(root.left, node, levels, level + 1):
+  if insert(root.left, node, levels, curr_level + 1):
     return True
   
-  return insert(root.right, node, levels, level+1)
+  return insert(root.right, node, levels, curr_level+1)
 
 def correct_heap(root):
   if not root or (not root.left and not root.right):
