@@ -28,8 +28,8 @@ class Toolbar:
 
     self.make_entry_field(
       root,
-      label='Add node',
-      btn_label='Add',
+      label="Add nodes",
+      btn_label="Add",
       submit_handler=on_add_new_node,
       row=0,
       column=0
