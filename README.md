@@ -12,9 +12,4 @@ A heap is implemented with actual tree instead of standart array approach, just 
 
 ## Screens
 
-Min-heap
 ![](https://i.ibb.co/f27sBzB/heap-screen-1.png)
-
-
-Max-heap
-![](https://i.ibb.co/TbjzN21/heap-screen-2.png)
