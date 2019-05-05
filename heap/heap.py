@@ -71,7 +71,7 @@ class Heap:
       None,
       init_pos,
       1,
-      { 'canvas': canvas, 'tree_size': self.size }
+      { 'canvas': canvas, 'tree_size': self.size, 'tree_depth': self.complete_levels + 1 }
     )
   
   def string_representations(self):

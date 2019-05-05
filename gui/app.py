@@ -101,7 +101,7 @@ class App:
         self.heap.add(key)
     
     if self._display_warning and self.heap.complete_levels >= 6:
-      self.text_output.println("WARNING: Nodes may start (or started) overlapping")
+      self.text_output.println("WARNING: Nodes may start (or started) overlapping and disappearing from your screen")
       self._display_warning = False
 
     self.heap_canvas.draw(self.heap)
