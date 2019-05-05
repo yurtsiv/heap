@@ -52,6 +52,10 @@ class App:
 
     # Text output
     text_output_cont = Frame(bottom_section)
+    text_output_cont.grid_columnconfigure(0, weight=1)
+    text_output_cont.grid_columnconfigure(1, weight=0)
+    text_output_cont.grid_rowconfigure(0, weight=0)
+    text_output_cont.grid_rowconfigure(1, weight=1)
     text_output_cont.grid(row=0, column=1, sticky="WENS")
     self.text_output = TextOutput(text_output_cont)
   

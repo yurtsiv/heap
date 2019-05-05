@@ -16,7 +16,7 @@ def draw_heap(root, rel_side, parent_pos, curr_depth, static_params):
   elif curr_depth == static_params['tree_depth'] - 1:
     horizontal_offset = 23
   else:
-    horizontal_offset = (tree_size * 55) / math.pow(curr_depth, 2.7)
+    horizontal_offset = (tree_size * 50) / math.pow(curr_depth, 2.7)
 
   new_pos = { 'y': parent_pos['y'] + vertical_offset, 'x': None }
 

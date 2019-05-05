@@ -2,11 +2,6 @@ from tkinter import *
 
 class TextOutput:
   def __init__(self, root):
-    root.grid_columnconfigure(0, weight=1)
-    root.grid_columnconfigure(1, weight=0)
-    root.grid_rowconfigure(0, weight=0)
-    root.grid_rowconfigure(1, weight=1)
-
     Label(root, text="Output:").grid(row=0, sticky="W")
 
     scrollbar = Scrollbar(root)
