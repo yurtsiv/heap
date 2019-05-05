@@ -5,9 +5,9 @@ A small programm with ugly UI for [binary heap](https://en.wikipedia.org/wiki/He
 A heap is implemented with actual tree instead of standart array approach, just to make it more interesting :)
 
 ## Installation & running
-- clone the repo
--  go to the directory you clonned to
-- `python3 index.py`
+-  `git clone https://github.com/yurtsiv/heap-visualizer.git`
+-  `cd heap-vizualizer`
+-  `python3 index.py`
 
 
 ## Screens
