@@ -8,6 +8,8 @@ class App:
   heap = Heap()
 
   def __init__(self, master):
+    self._display_warning = True
+  
     # open full screen
     master.wm_attributes('-zoomed', True)
     master.update()
@@ -89,9 +91,17 @@ class App:
     self.heap = Heap()
     self.heap_canvas.draw(self.heap)
     self.text_output.clear()
+    self._display_warning = True
 
   def on_add_new_node(self, keys):
     for key in keys:
-      self.heap.add(key)
+      if key >= 100:
+        self.text_output.println("WARNING: Node " + str(key) + " was not added (should be < 100)")
+      else:
+        self.heap.add(key)
+    
+    if self._display_warning and self.heap.complete_levels >= 6:
+      self.text_output.println("WARNING: Nodes may start (or started) overlapping")
+      self._display_warning = False
 
     self.heap_canvas.draw(self.heap)
